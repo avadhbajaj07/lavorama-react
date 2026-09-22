@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import SelfService from './SelfService.jsx';
@@ -9,10 +9,53 @@ import Faq from './Faq.jsx';
 import { Navbar, PageFooter } from './components.jsx';
 import { useLang } from './LangContext.jsx';
 
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?hl=fr&q=Lavorama+Gen%C3%A8ve&ludocid=13242875098853718847#lrd=0x478c65d2701fd2c9:0xb7c824bd180abb3f,1,,,,';
+const GOOGLE_REVIEWS = [
+  {
+    name: 'Will Kueh',
+    initial: 'W',
+    isLocalGuide: true,
+    excerpt: 'Easy to use and there are few language selection. Reasonable price and convenient.',
+  },
+  {
+    name: 'Jack Tyler',
+    initial: 'J',
+    excerpt: 'Great experience at Lavorama. The Manager who was there provided a lot of assistance with the washer and dryer. He suggested a dryer that worked really well. The place is very clean as well. He was really good with my children who were being very rambunctious. I enjoyed my experience. Also, very affordable.',
+  },
+  {
+    name: 'Sa Ma',
+    initial: 'S',
+    excerpt: 'Très bonne laverie, machines propres et efficaces. Le linge ressort toujours nickel et la lessive est incluse, ce qui est vraiment pratique. Pour moi, c’est l’une des meilleures laveries du coin. Je recommande sans hésiter.',
+  },
+];
+
 function App() {
   const { t } = useLang();
   const h = t.home;
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+  const [reviewsPaused, setReviewsPaused] = useState(false);
+  const [reviewsInteracting, setReviewsInteracting] = useState(false);
   const currentPage = window.location.pathname;
+  const activeReview = GOOGLE_REVIEWS[activeReviewIndex];
+  const reviewSliderPaused = reviewsPaused || reviewsInteracting;
+
+  useEffect(() => {
+    if (reviewSliderPaused) return undefined;
+
+    const timer = window.setTimeout(() => {
+      setActiveReviewIndex((current) => (current + 1) % GOOGLE_REVIEWS.length);
+    }, 20000);
+
+    return () => window.clearTimeout(timer);
+  }, [activeReviewIndex, reviewSliderPaused]);
+
+  const showPreviousReview = () => {
+    setActiveReviewIndex((current) => (current - 1 + GOOGLE_REVIEWS.length) % GOOGLE_REVIEWS.length);
+  };
+
+  const showNextReview = () => {
+    setActiveReviewIndex((current) => (current + 1) % GOOGLE_REVIEWS.length);
+  };
 
   if (currentPage === '/about') return <About />;
   if (currentPage === '/contact') return <Contact />;
@@ -132,24 +175,93 @@ function App() {
         </div>
       </section>
 
-      {/* ── 5. TESTIMONIALS ── */}
+      {/* ── 5. GOOGLE REVIEWS ── */}
       <section className="section bg-light">
         <div className="container">
-          <p style={{ textAlign: 'center', color: 'var(--secondary)', fontFamily: 'Fredoka', fontSize: '1rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{h.testimonialsLabel}</p>
-          <h2>{h.testimonialsTitle}</h2>
-          <p style={{ textAlign: 'center', maxWidth: '540px', margin: '-1.5rem auto 3rem' }}>{h.testimonialsSubtitle}</p>
-          <div className="testimonial-grid">
-            {h.testimonials.map((t, i) => (
-              <div className="testimonial-card" key={i}>
-                <div className="stars">★★★★★</div>
-                <div className="testi-user">
-                  <img src={`/reset/${t.img}`} alt={t.name} width="50" height="50" loading="lazy" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }} />
-                  <h4>{t.name}</h4>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>{t.location}</span>
-                </div>
-                <p style={{ fontSize: '0.9rem', marginTop: '1rem', fontWeight: 500 }}>"{t.review}"</p>
+          <p className="section-eyebrow">{h.googleReviewsLabel}</p>
+          <h2>{h.googleReviewsTitle}</h2>
+          <p className="section-intro">{h.googleReviewsSubtitle}</p>
+
+          <div className="google-reviews-panel">
+            <div className="google-rating-summary">
+              <div className="google-brand" aria-label="Google">
+                <span className="google-g" aria-hidden="true">G</span>
+                <span>Google</span>
               </div>
-            ))}
+              <div className="google-rating-row">
+                <strong>{h.googleRating}</strong>
+                <span className="rating-stars" aria-label={h.googleRatingAria}>
+                  <span aria-hidden="true">★★★★★</span>
+                  <span className="rating-stars-fill" aria-hidden="true">★★★★★</span>
+                </span>
+              </div>
+              <p className="google-review-count">{h.googleReviewCount}</p>
+              <p className="google-review-note">{h.googleReviewNote}</p>
+              <div className="google-review-actions">
+                <a
+                  href={GOOGLE_REVIEWS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-teal"
+                >
+                  {h.googleReviewsCta}
+                </a>
+              </div>
+            </div>
+
+            <div
+              className="google-review-slider"
+              onMouseEnter={() => setReviewsInteracting(true)}
+              onMouseLeave={() => setReviewsInteracting(false)}
+              onFocusCapture={() => setReviewsInteracting(true)}
+              onBlurCapture={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setReviewsInteracting(false);
+              }}
+            >
+              <article className="google-review-card" key={activeReview.name}>
+                <div className="google-review-source">
+                  <span className="google-g google-g-small" aria-hidden="true">G</span>
+                  <span>{h.googleReviewSource}</span>
+                </div>
+                <div className="google-review-author">
+                  <span className="reviewer-initial" aria-hidden="true">{activeReview.initial}</span>
+                  <div>
+                    <h3>{activeReview.name}</h3>
+                    <span>{activeReview.isLocalGuide ? h.googleReviewerType : h.googleReviewerLabel}</span>
+                  </div>
+                </div>
+                <div className="review-stars" aria-label={h.fiveStarRating}>★★★★★</div>
+                <blockquote>“{activeReview.excerpt}”</blockquote>
+              </article>
+
+              <div className="review-slider-footer">
+                <div className="review-slider-controls" role="group" aria-label={h.googleReviewSliderLabel}>
+                  <button type="button" onClick={showPreviousReview} aria-label={h.googleReviewPrevious}>‹</button>
+                  <div className="review-slider-dots">
+                    {GOOGLE_REVIEWS.map((review, index) => (
+                      <button
+                        type="button"
+                        key={review.name}
+                        className={index === activeReviewIndex ? 'is-active' : ''}
+                        onClick={() => setActiveReviewIndex(index)}
+                        aria-label={`${h.googleReviewShow} ${index + 1}`}
+                        aria-current={index === activeReviewIndex ? 'true' : undefined}
+                      />
+                    ))}
+                  </div>
+                  <button type="button" onClick={showNextReview} aria-label={h.googleReviewNext}>›</button>
+                  <button
+                    type="button"
+                    className="review-slider-pause"
+                    onClick={() => setReviewsPaused((paused) => !paused)}
+                    aria-label={reviewsPaused ? h.googleReviewPlay : h.googleReviewPause}
+                    aria-pressed={reviewsPaused}
+                  >
+                    <span aria-hidden="true">{reviewsPaused ? '▶' : 'Ⅱ'}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
