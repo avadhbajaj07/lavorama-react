@@ -4,37 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Canonical domain redirect fallback -->
+    <script>
+      if (window.location.hostname === 'lavorama-react.vercel.app' || window.location.hostname === 'www.lavorama.ch') {
+        window.location.replace('https://lavorama.ch' + window.location.pathname + window.location.search + window.location.hash);
+      }
+    </script>
+
     <!-- PRIMARY SEO — Français (langue par défaut) -->
-    <title>Lavorama | Laverie Automatique Genève</title>
-    <meta name="description" content="Lavorama, la laverie moderne de Genève. Machines libre-service dès CHF 6. Ouvert 7j/7, 7h–23h. Emplacements à Pâquis et Plainpalais." />
-    <meta name="keywords" content="laverie automatique Genève, laverie Pâquis, laverie Plainpalais, laundromat Geneva, laverie libre-service Genève, lessive Genève, blanchisserie Genève" />
+    <title>Laverie automatique à Genève | Pâquis & Plainpalais | Lavorama</title>
+    <meta name="description" content="Lavorama, votre laverie automatique à Genève. Deux laveries ouvertes à Pâquis et Plainpalais, machines libre-service, sèche-linge et machine grande capacité de 30 kg. Ouvert 7j/7 de 7h à 23h." />
+    <meta name="keywords" content="laverie automatique Genève, laverie libre-service Genève, laverie Genève, laverie Plainpalais, laverie Pâquis, laverie Rue Dancet, machine à laver 30 kg Genève, sèche-linge Genève, laver couette Genève, laundromat Geneva, self-service laundry Geneva" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Lavorama" />
-    <link rel="canonical" href="https://lavorama-react.vercel.app/" />
-    <!-- hreflang: bilingual SEO signals -->
-    <link rel="alternate" hreflang="fr" href="https://lavorama-react.vercel.app/" />
-    <link rel="alternate" hreflang="en" href="https://lavorama-react.vercel.app/" />
-    <link rel="alternate" hreflang="x-default" href="https://lavorama-react.vercel.app/" />
+    <link rel="canonical" href="https://lavorama.ch/" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="/reset/Lavorama.png" />
+    <link rel="apple-touch-icon" href="/reset/Lavorama.png" />
+
+    <!-- hreflang: bilingual & regional SEO signals -->
+    <link rel="alternate" hreflang="fr" href="https://lavorama.ch/" />
+    <link rel="alternate" hreflang="fr-CH" href="https://lavorama.ch/" />
+    <link rel="alternate" hreflang="en" href="https://lavorama.ch/" />
+    <link rel="alternate" hreflang="en-CH" href="https://lavorama.ch/" />
+    <link rel="alternate" hreflang="x-default" href="https://lavorama.ch/" />
 
     <!-- OPEN GRAPH (Social sharing) -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lavorama-react.vercel.app/" />
-    <meta property="og:title" content="Lavorama Genève — Laverie Automatique" />
-    <meta property="og:description" content="La laverie moderne de Genève. Machines dès CHF 6. Ouvert 7j/7. Emplacements à Pâquis et Plainpalais." />
+    <meta property="og:url" content="https://lavorama.ch/" />
+    <meta property="og:title" content="Laverie automatique à Genève | Pâquis & Plainpalais | Lavorama" />
+    <meta property="og:description" content="Lavorama, votre laverie automatique à Genève. Deux laveries ouvertes à Pâquis et Plainpalais, machines libre-service, sèche-linge et machine grande capacité de 30 kg. Ouvert 7j/7 de 7h à 23h." />
+    <meta property="og:image" content="https://lavorama.ch/reset/imgi_67_lavorama-log-1-300x87.jpg" />
     <meta property="og:locale" content="fr_CH" />
     <meta property="og:locale:alternate" content="en_CH" />
     <meta property="og:site_name" content="Lavorama Geneva" />
 
-    <!-- LOCAL BUSINESS SCHEMA MARKUP -->
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Laverie automatique à Genève | Pâquis & Plainpalais | Lavorama" />
+    <meta name="twitter:description" content="Lavorama, votre laverie automatique à Genève. Deux laveries ouvertes à Pâquis et Plainpalais, machines libre-service, sèche-linge et machine grande capacité de 30 kg. Ouvert 7j/7 de 7h à 23h." />
+    <meta name="twitter:image" content="https://lavorama.ch/reset/imgi_67_lavorama-log-1-300x87.jpg" />
+
+    <!-- STRUCTURED DATA: ORGANIZATION & WEBSITE -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Lavorama",
+      "url": "https://lavorama.ch",
+      "logo": "https://lavorama.ch/reset/imgi_67_lavorama-log-1-300x87.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+41795654142",
+        "contactType": "customer service",
+        "email": "booking@lavorama.ch",
+        "availableLanguage": ["French", "English"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Lavorama",
+      "url": "https://lavorama.ch"
+    }
+    </script>
+
+    <!-- LOCAL BUSINESS SCHEMA: LOCATION 1 (PÂQUIS) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LaundryService",
-      "name": "Lavorama",
-      "image": "https://lavorama-react.vercel.app/reset/imgi_67_lavorama-log-1-300x87.jpg",
-      "url": "https://lavorama-react.vercel.app",
+      "@id": "https://lavorama.ch/#paquis",
+      "name": "Lavorama Pâquis",
+      "image": "https://lavorama.ch/reset/imgi_67_lavorama-log-1-300x87.jpg",
+      "url": "https://lavorama.ch",
       "telephone": "+41795654142",
-      "email": "info@lavorama.ch",
+      "email": "booking@lavorama.ch",
       "priceRange": "CHF 6 – CHF 16",
       "address": {
         "@type": "PostalAddress",
@@ -88,6 +136,41 @@
     }
     </script>
 
+    <!-- LOCAL BUSINESS SCHEMA: LOCATION 2 (PLAINPALAIS) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LaundryService",
+      "@id": "https://lavorama.ch/#plainpalais",
+      "name": "Lavorama Plainpalais",
+      "image": "https://lavorama.ch/reset/imgi_67_lavorama-log-1-300x87.jpg",
+      "url": "https://lavorama.ch",
+      "telephone": "+41795654142",
+      "email": "booking@lavorama.ch",
+      "priceRange": "CHF 6 – CHF 16",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rue Dancet 2",
+        "addressLocality": "Genève",
+        "postalCode": "1205",
+        "addressCountry": "CH"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "07:00",
+          "closes": "23:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Geneva"
+      },
+      "description": "Lavorama Plainpalais — Laverie automatique libre-service avec machine grande capacité de 30 kg à Genève. Ouvert 7j/7 de 7h à 23h."
+    }
+    </script>
+
     <!-- FAQ SCHEMA — Français (primary) -->
     <script type="application/ld+json">
     {
@@ -115,7 +198,7 @@
           "name": "Où se trouvent vos laveries à Genève ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nous avons deux emplacements : Pâquis (Rue des Pâquis 43) et Plainpalais (Rue Dancet 2, ouverture prochaine)."
+            "text": "Nous avons deux laveries ouvertes à Genève : Pâquis (Rue des Pâquis 43, 1201 Genève) et Plainpalais (Rue Dancet 2, 1205 Genève — Maintenant ouvert)."
           }
         }
       ]

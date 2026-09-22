@@ -18,7 +18,7 @@ function Navbar({ active }) {
       <div className="container">
         <nav className="nav-inner">
           <a href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-            <img src="/reset/imgi_67_lavorama-log-1-300x87.jpg" alt="Lavorama Geneva Laundromat" style={{ height: '40px' }} />
+            <img src="/reset/imgi_67_lavorama-log-1-300x87.jpg" alt="Lavorama Geneva Laundromat" width="138" height="40" style={{ height: '40px', width: 'auto' }} />
           </a>
 
           {/* Desktop nav */}
@@ -79,7 +79,7 @@ function Navbar({ active }) {
 }
 
 function PageFooter() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const f = t.footer;
 
   return (
@@ -117,11 +117,11 @@ function PageFooter() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col" style={{ paddingRight: '1rem' }}>
-            <img src="/reset/Lavorama white.png" alt="Lavorama Geneva" style={{ height: '36px', marginBottom: '1.5rem' }} />
+            <img src="/reset/Lavorama white.png" alt="Lavorama Geneva" width="150" height="36" style={{ height: '36px', width: 'auto', marginBottom: '1.5rem' }} />
             <p style={{ color: '#94A3B8', fontSize: '0.875rem', lineHeight: 1.7 }}>{f.tagline}</p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.25rem' }}>
               {['📘', '📸', '🐦'].map((icon, i) => (
-                <a key={i} href="#" style={{ width: '36px', height: '36px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', textDecoration: 'none' }}>{icon}</a>
+                <a key={i} href="#" aria-label={`Social link ${i + 1}`} style={{ width: '36px', height: '36px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', textDecoration: 'none' }}>{icon}</a>
               ))}
             </div>
           </div>
@@ -153,12 +153,12 @@ function PageFooter() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               {[
                 { icon: '📍', text: 'Rue des Pâquis 43\n1201 Genève, Suisse' },
-                { icon: '📍', text: 'Rue Dancet 2\n1205 Genève, Suisse (ouverture prochaine)' },
+                { icon: '📍', text: lang === 'fr' ? 'Rue Dancet 2\n1205 Genève, Suisse — Maintenant ouvert' : 'Rue Dancet 2\n1205 Geneva, Switzerland — Now open' },
                 { icon: '📞', text: '+41 79 565 41 42' },
                 { icon: '✉️', text: 'booking@lavorama.ch' },
                 { icon: '🕐', text: f.hours },
               ].map(item => (
-                <li key={item.icon} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                <li key={item.icon + item.text} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
                   <span style={{ color: 'var(--primary)', flexShrink: 0 }}>{item.icon}</span>
                   <span style={{ color: '#94A3B8', fontSize: '0.875rem', whiteSpace: 'pre-line', lineHeight: 1.5 }}>{item.text}</span>
                 </li>
@@ -170,9 +170,8 @@ function PageFooter() {
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '3rem', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <p style={{ color: '#64748B', fontSize: '0.875rem', margin: 0 }}>{f.copyright}</p>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
-            {[f.terms, f.privacy].map(l => (
-              <a key={l} href="#" style={{ color: '#64748B', fontSize: '0.875rem', textDecoration: 'none' }}>{l}</a>
-            ))}
+            <a href="/terms" style={{ color: '#64748B', fontSize: '0.875rem', textDecoration: 'none' }}>{f.terms}</a>
+            <a href="/privacy" style={{ color: '#64748B', fontSize: '0.875rem', textDecoration: 'none' }}>{f.privacy}</a>
           </div>
         </div>
       </div>

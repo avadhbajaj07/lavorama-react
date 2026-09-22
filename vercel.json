@@ -1,5 +1,29 @@
 {
   "buildCommand": "chmod +x node_modules/.bin/vite && npm run build",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "lavorama-react.vercel.app"
+        }
+      ],
+      "destination": "https://lavorama.ch/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lavorama.ch"
+        }
+      ],
+      "destination": "https://lavorama.ch/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

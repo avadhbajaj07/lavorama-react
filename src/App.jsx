@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import SelfService from './SelfService.jsx';
@@ -12,7 +12,6 @@ import { useLang } from './LangContext.jsx';
 function App() {
   const { t } = useLang();
   const h = t.home;
-  const [faqOpen, setFaqOpen] = useState(null);
   const currentPage = window.location.pathname;
 
   if (currentPage === '/about') return <About />;
@@ -31,7 +30,7 @@ function App() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="text-wrapper" style={{ paddingBottom: '5rem', position: 'relative' }}>
-            <img src="/reset/imgi_42_ele10-284x300.png" className="dots-pattern" alt="" style={{ width: '100px' }} />
+            <img src="/reset/imgi_42_ele10-284x300.png" className="dots-pattern" alt="" aria-hidden="true" width="100" height="106" style={{ width: '100px', height: 'auto' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '1.2rem' }}>
               <div style={{ display: 'inline-block', background: 'var(--secondary)', color: 'white', borderRadius: '50px', padding: '0.35rem 1.2rem', fontSize: '0.9rem', fontFamily: 'Fredoka' }}>
                 {h.heroBadge1}
@@ -41,14 +40,15 @@ function App() {
               </div>
             </div>
             <h1>{h.heroTitle.split('\n').map((line, i) => <React.Fragment key={i}>{line}{i < 2 && <br />}</React.Fragment>)}</h1>
-            <p style={{ maxWidth: '440px' }}>{h.heroP1}</p>
-            <p style={{ fontSize: '0.95rem', maxWidth: '440px' }}>{h.heroP2}</p>
+            <p style={{ maxWidth: '480px', fontSize: '1.05rem', lineHeight: 1.6 }}>{h.heroP1}</p>
+            <p style={{ fontSize: '0.95rem', maxWidth: '480px' }}>{h.heroP2}</p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
               <a href="#pricing" className="btn btn-orange">{h.heroCta1}</a>
+              <a href="/contact" className="btn btn-teal">{h.contactCta1}</a>
             </div>
           </div>
           <div className="image-wrapper hero-img">
-            <img src="/reset/imgi_75_LAVORAMA-MAIN-MODEL-BR-1.png" alt="Lavorama self-service laundromat Geneva" />
+            <img src="/reset/imgi_75_LAVORAMA-MAIN-MODEL-BR-1.png" alt="Lavorama self-service laundromat Geneva" width="450" height="550" fetchpriority="high" style={{ width: '100%', maxWidth: '450px', height: 'auto' }} />
           </div>
         </div>
       </section>
@@ -63,7 +63,7 @@ function App() {
             <div style={{ flex: '1 1 400px' }}>
               <div style={{ position: 'relative' }}>
                 <div style={{ position: 'absolute', top: '-15px', left: '-15px', width: '100%', height: '100%', background: 'var(--primary-light)', borderRadius: '24px', zIndex: 0 }}></div>
-                <img src="/reset/lavorama-geneva-booking-desk-notes-lifestyle.jpeg" alt="Lavorama Geneva self-service" style={{ position: 'relative', zIndex: 1, borderRadius: '24px', width: '100%', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
+                <img src="/reset/lavorama-geneva-booking-desk-notes-lifestyle.jpeg" alt="Lavorama Geneva self-service laundromat" width="400" height="300" loading="lazy" style={{ position: 'relative', zIndex: 1, borderRadius: '24px', width: '100%', height: 'auto', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
               </div>
             </div>
             <div style={{ flex: '1 1 400px' }}>
@@ -94,7 +94,7 @@ function App() {
           <p style={{ textAlign: 'center', color: 'var(--secondary)', fontFamily: 'Fredoka', fontSize: '1rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{h.pricingLabel}</p>
           <h2>{h.pricingTitle}</h2>
           <p style={{ textAlign: 'center', maxWidth: '600px', margin: '-1.5rem auto 3rem' }}>{h.pricingSubtitle}</p>
-          <div className="pricing-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1.5rem', alignItems: 'start' }}>
+          <div className="pricing-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
             {h.pricingPlans.map((plan, i) => (
               <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '2rem', boxShadow: '0 4px 20px rgba(108,191,191,0.12)', border: plan.popular ? '2px solid var(--primary)' : '1px solid var(--border)', position: 'relative' }}>
                 {plan.popular && <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary)', color: 'white', padding: '0.25rem 1rem', borderRadius: '50px', fontSize: '0.8rem', fontFamily: 'Fredoka', whiteSpace: 'nowrap' }}>{h.mostPopular}</div>}
@@ -109,19 +109,18 @@ function App() {
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
       {/* ── 4. WHY LAVORAMA ── */}
       <section className="section bg-teal" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/reset/imgi_16_10.png" alt="" style={{ position: 'absolute', bottom: 0, left: '-20px', width: '160px' }} />
-        <img src="/reset/imgi_21_11.png" alt="" style={{ position: 'absolute', top: '10%', right: '-10px', width: '140px', transform: 'rotate(-15deg)' }} />
+        <img src="/reset/imgi_16_10.png" alt="" aria-hidden="true" style={{ position: 'absolute', bottom: 0, left: '-20px', width: '160px' }} />
+        <img src="/reset/imgi_21_11.png" alt="" aria-hidden="true" style={{ position: 'absolute', top: '10%', right: '-10px', width: '140px', transform: 'rotate(-15deg)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.8)', fontFamily: 'Fredoka', fontSize: '1rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{h.whyLabel}</p>
           <h2 style={{ color: 'white', marginBottom: '0.5rem' }}>{h.whyTitle}</h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', textAlign: 'center', maxWidth: '600px', margin: '0 auto 3rem', fontWeight: 400 }}>{h.whySubtitle}</p>
-          <div className="why-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1.5rem' }}>
+          <div className="why-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
             {h.whyFeatures.map((f, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(255,255,255,0.25)', textAlign: 'center' }}>
                 <div style={{ fontSize: '2.2rem', marginBottom: '1rem' }}>{f.icon}</div>
@@ -144,7 +143,7 @@ function App() {
               <div className="testimonial-card" key={i}>
                 <div className="stars">★★★★★</div>
                 <div className="testi-user">
-                  <img src={`/reset/${t.img}`} alt={t.name} />
+                  <img src={`/reset/${t.img}`} alt={t.name} width="50" height="50" loading="lazy" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }} />
                   <h4>{t.name}</h4>
                   <span style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>{t.location}</span>
                 </div>
@@ -165,7 +164,7 @@ function App() {
             {h.contactInfo.map((item, i) => (
               <div key={i} style={{ background: 'white', borderRadius: '16px', padding: '1.5rem 2rem', boxShadow: '0 4px 15px rgba(108,191,191,0.12)', minWidth: '200px', flex: '1 1 200px', maxWidth: '300px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{item.icon}</div>
-                <h4 style={{ fontFamily: 'Fredoka', color: 'var(--primary)', marginBottom: '0.25rem' }}>{item.label}</h4>
+                <h3 style={{ fontFamily: 'Fredoka', color: 'var(--primary)', marginBottom: '0.25rem', fontSize: '1.15rem' }}>{item.label}</h3>
                 <p style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: 0 }}>{item.val}</p>
               </div>
             ))}
@@ -176,8 +175,6 @@ function App() {
           </div>
         </div>
       </section>
-
-
 
       <PageFooter />
     </>

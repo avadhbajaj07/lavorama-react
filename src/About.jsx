@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, PageFooter } from './components.jsx';
 import { useLang } from './LangContext.jsx';
 
 function About() {
   const { lang } = useLang();
-  const [email, setEmail] = useState('');
 
   const t = {
     fr: {
-      title: "À propos de nous",
+      title: "À propos de Lavorama",
+      badge: "À propos de nous",
+      subtitle: "La laverie moderne de Genève — libre-service. Deux laveries ouvertes à Pâquis et Plainpalais.",
       priorityTitle: "Votre lessive,\nNotre priorité",
-      priorityP1: "Lavorama a été fondé avec une idée simple : rendre la lessive sans effort pour les résidents de Genève. Avec nos laveries à Pâquis et Plainpalais, nous proposons des machines industrielles performantes dans un environnement propre et moderne.",
+      priorityP1: "Lavorama a été fondé avec une idée simple : rendre la lessive sans effort pour les résidents de Genève. Deux laveries Lavorama sont ouvertes à Pâquis et Plainpalais. Nous proposons des machines industrielles performantes de 7 kg à 30 kg dans un environnement propre et moderne.",
       priorityP2: "Nous garantissons des résultats impeccables à chaque fois.",
       solutionsTitle: "Des solutions pour\nune vie active",
-      solutionsDesc: "Nous savons que votre temps est précieux. C'est pourquoi nous avons équipé notre laverie de machines rapides et de détergents professionnels, pour que vous passiez moins de temps à laver et plus de temps à profiter de Genève.",
+      solutionsDesc: "Nous savons que votre temps est précieux. C'est pourquoi nous avons équipé nos laveries de machines rapides et de détergents professionnels, pour que vous passiez moins de temps à laver et plus de temps à profiter de Genève.",
       solutionsCta: "Nous contacter",
       cleaningTitle: "Pas de décoloration,\nJuste de la propreté",
       cleaningDesc: "Nos machines contrôlent précisément la température et l'essorage pour protéger vos vêtements. Les détergents écologiques inclus éliminent les taches tenaces tout en préservant les couleurs.",
@@ -21,19 +22,18 @@ function About() {
       perfumeDesc: "Vos vêtements sentent le frais et le propre pendant des semaines.",
       detergentTitle: "Détergent de confiance",
       detergentDesc: "Produits biodégradables certifiés, doux pour la peau et l'environnement.",
-      newsletterTitle: "Rejoignez notre\nNewsletter",
-      newsletterDesc: "Inscrivez-vous pour recevoir des offres exclusives et 20% de réduction sur votre première commande.",
-      newsletterPlaceholder: "Votre e-mail ici",
-      newsletterCta: "S'inscrire maintenant",
-      newsletterSuccess: "Inscrit(e) avec succès !"
+      contactBtn: "Nous contacter",
+      selfServiceBtn: "Libre-service"
     },
     en: {
-      title: "About Us",
+      title: "About Lavorama",
+      badge: "About Us",
+      subtitle: "Geneva's modern self-service laundromat. Two locations open in Pâquis and Plainpalais.",
       priorityTitle: "Your Laundry,\nOur Priority",
-      priorityP1: "Lavorama was founded with a simple idea: making laundry effortless for Geneva residents. With locations in Pâquis and Plainpalais, we offer high-performance industrial machines in a clean, modern environment.",
+      priorityP1: "Lavorama was founded with a simple idea: making laundry effortless for Geneva residents. Two Lavorama laundromats are now open in Pâquis and Plainpalais. We offer high-performance industrial machines from 7 kg to 30 kg in a clean, modern environment.",
       priorityP2: "We guarantee flawless results every single time.",
       solutionsTitle: "Laundry Solutions For\nA Busy Life",
-      solutionsDesc: "We know your time is valuable. That's why we equipped our laundromat with fast machines and professional detergents, so you spend less time washing and more time enjoying Geneva.",
+      solutionsDesc: "We know your time is valuable. That's why we equipped our laundromats with fast machines and professional detergents, so you spend less time washing and more time enjoying Geneva.",
       solutionsCta: "Contact Us",
       cleaningTitle: "No Fading,\nOnly Cleaning",
       cleaningDesc: "Our machines precisely control temperature and spin to protect your garments. The included eco-friendly detergents remove tough stains while preserving colors.",
@@ -41,15 +41,12 @@ function About() {
       perfumeDesc: "Your clothes smell fresh and clean for weeks.",
       detergentTitle: "Trusted Detergent",
       detergentDesc: "Certified biodegradable products, gentle on the skin and the environment.",
-      newsletterTitle: "Join Our\nNewsletter",
-      newsletterDesc: "Subscribe to receive exclusive offers and 20% off your first order.",
-      newsletterPlaceholder: "Your Email Here",
-      newsletterCta: "Subscribe Now",
-      newsletterSuccess: "Successfully subscribed!"
+      contactBtn: "Contact Us",
+      selfServiceBtn: "Self-Service"
     }
   };
 
-  const c = t[lang];
+  const c = t[lang] || t.en;
 
   return (
     <>
@@ -57,22 +54,22 @@ function About() {
 
       {/* 1. About Us Hero */}
       <section style={{ background: 'linear-gradient(180deg, #D6F0F4 0%, #EBF8FA 100%)', padding: '5rem 0 0', position: 'relative', overflow: 'hidden' }}>
-        <img src="/reset/imgi_41_s2-300x291.png" alt="splash" style={{ position: 'absolute', top: '-30px', left: '5%', width: '200px', opacity: 0.4 }} />
+        <img src="/reset/imgi_41_s2-300x291.png" alt="" aria-hidden="true" style={{ position: 'absolute', top: '-30px', left: '5%', width: '200px', opacity: 0.4 }} />
         <div className="container">
           <div className="hero-grid">
             <div style={{ paddingBottom: '4rem' }}>
               <div style={{ display: 'inline-block', background: 'var(--secondary)', color: 'white', borderRadius: '50px', padding: '0.35rem 1.2rem', fontSize: '0.85rem', fontFamily: 'Fredoka', marginBottom: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                À propos de nous
+                {c.badge}
               </div>
               <h1 style={{ fontFamily: 'Fredoka', fontSize: 'clamp(2.2rem, 8vw, 4.5rem)', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', lineHeight: 1.1, marginBottom: '1.2rem' }}>{c.title}</h1>
-              <p style={{ maxWidth: '440px', marginBottom: '2rem' }}>La laverie moderne de Genève — libre-service. Emplacements à Pâquis et Plainpalais.</p>
+              <p style={{ maxWidth: '440px', marginBottom: '2rem', fontSize: '1.05rem' }}>{c.subtitle}</p>
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <a href="/contact" className="btn btn-orange">Nous contacter</a>
-                <a href="/self-service-laundromat-geneva" className="btn btn-teal">Libre-service</a>
+                <a href="/contact" className="btn btn-orange">{c.contactBtn}</a>
+                <a href="/self-service-laundromat-geneva" className="btn btn-teal">{c.selfServiceBtn}</a>
               </div>
             </div>
             <div className="hero-img">
-              <img src="/reset/imgi_17_lavorama-cute-model-2-814x1024.png" alt="Lavorama Geneva laundromat" style={{ maxWidth: '90%' }} />
+              <img src="/reset/imgi_17_lavorama-cute-model-2-814x1024.png" alt="Lavorama Geneva laundromat" width="400" height="500" style={{ maxWidth: '90%', height: 'auto' }} />
             </div>
           </div>
         </div>
@@ -82,11 +79,14 @@ function About() {
       <section className="section" style={{ background: 'white' }}>
         <div className="container two-col-section">
           <div className="image-wrapper" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img src="/reset/imgi_41_s2-300x291.png" alt="splash" style={{ position: 'absolute', top: '-10%', left: '-5%', width: '320px', opacity: 0.4, zIndex: 0 }} />
+            <img src="/reset/imgi_41_s2-300x291.png" alt="" aria-hidden="true" style={{ position: 'absolute', top: '-10%', left: '-5%', width: '320px', opacity: 0.4, zIndex: 0 }} />
             <img
               src="/reset/lavorama-geneva-detergent-lift-laundry-room-lifestyle.jpeg"
               alt="Lavorama laundry folded"
-              style={{ position: 'relative', zIndex: 1, maxWidth: '90%', borderRadius: '12px' }}
+              width="400"
+              height="300"
+              loading="lazy"
+              style={{ position: 'relative', zIndex: 1, maxWidth: '90%', height: 'auto', borderRadius: '12px' }}
             />
           </div>
           <div className="text-wrapper">
@@ -101,9 +101,9 @@ function About() {
 
       {/* 3. Laundry Solutions For A Busy Life */}
       <section className="section bg-teal" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/reset/imgi_2_ele2.png" alt="star" style={{ position: 'absolute', top: '15%', left: '5%', width: '90px', opacity: 0.9 }} />
-        <img src="/reset/imgi_16_10.png" alt="glove" style={{ position: 'absolute', bottom: '-10px', left: '-20px', width: '160px' }} />
-        <img src="/reset/imgi_42_ele10-284x300.png" alt="dots" style={{ position: 'absolute', right: '8%', top: '20%', width: '140px', opacity: 0.35 }} />
+        <img src="/reset/imgi_2_ele2.png" alt="" aria-hidden="true" style={{ position: 'absolute', top: '15%', left: '5%', width: '90px', opacity: 0.9 }} />
+        <img src="/reset/imgi_16_10.png" alt="" aria-hidden="true" style={{ position: 'absolute', bottom: '-10px', left: '-20px', width: '160px' }} />
+        <img src="/reset/imgi_42_ele10-284x300.png" alt="" aria-hidden="true" style={{ position: 'absolute', right: '8%', top: '20%', width: '140px', opacity: 0.35 }} />
 
         <div className="container text-center" style={{ position: 'relative', zIndex: 1, padding: '3rem 0' }}>
           <h2 style={{ fontSize: '3rem', color: 'white', marginBottom: '1rem' }}>
@@ -127,20 +127,18 @@ function About() {
           </div>
           <div className="feature-cards">
             <div className="feature-card" style={{ background: 'var(--bg-light)', borderRadius: '16px', padding: '2rem', textAlign: 'center', flex: 1 }}>
-              <img src="/reset/imgi_11_7-rose_512.png" alt="Premium Perfume" style={{ width: '55px', marginBottom: '1rem' }} />
-              <h4 style={{ color: 'var(--primary)', fontFamily: 'Fredoka', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{c.perfumeTitle}</h4>
+              <img src="/reset/imgi_11_7-rose_512.png" alt="Premium Perfume" width="55" height="55" loading="lazy" style={{ width: '55px', height: 'auto', marginBottom: '1rem' }} />
+              <h3 style={{ color: 'var(--primary)', fontFamily: 'Fredoka', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{c.perfumeTitle}</h3>
               <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>{c.perfumeDesc}</p>
             </div>
             <div className="feature-card" style={{ background: 'var(--bg-light)', borderRadius: '16px', padding: '2rem', textAlign: 'center', flex: 1 }}>
-              <img src="/reset/imgi_12_25-washing-powder_512.png" alt="Trusted Detergent" style={{ width: '55px', marginBottom: '1rem' }} />
-              <h4 style={{ color: 'var(--primary)', fontFamily: 'Fredoka', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{c.detergentTitle}</h4>
+              <img src="/reset/imgi_12_25-washing-powder_512.png" alt="Trusted Detergent" width="55" height="55" loading="lazy" style={{ width: '55px', height: 'auto', marginBottom: '1rem' }} />
+              <h3 style={{ color: 'var(--primary)', fontFamily: 'Fredoka', fontSize: '1.2rem', marginBottom: '0.5rem' }}>{c.detergentTitle}</h3>
               <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>{c.detergentDesc}</p>
             </div>
           </div>
         </div>
       </section>
-
-
 
       <PageFooter />
     </>
